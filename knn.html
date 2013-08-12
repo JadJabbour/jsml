@@ -1,0 +1,79 @@
+<html>
+	<head>
+		<script type="text/javascript" src="jsML.js"></script>
+	</head>
+	<body>
+		<script type="text/javascript">
+			////to handle output
+			function out(object){
+				console.log(object);
+			}
+
+			////create the dimension list of measured dimensions
+			jsML.kNN.buildDimensionList("inches|2,voltage|1,heat|3,brightness|4");
+			////initialize an instance of nodeList
+			var list = jsML.kNN.nodeList(13);
+			////fill list with data-full nodes
+			//fluorecent
+			list.addNode(new jsML.kNN.node({inches:5, voltage:110, heat:10, brightness:500, type:'fluorecent'}));
+			list.addNode(new jsML.kNN.node({inches:3, voltage:110, heat:30, brightness:800, type:'fluorecent'}));
+			list.addNode(new jsML.kNN.node({inches:1, voltage:110, heat:47, brightness:990, type:'fluorecent'}));
+			list.addNode(new jsML.kNN.node({inches:5, voltage:110, heat:32, brightness:830, type:'fluorecent'}));
+			list.addNode(new jsML.kNN.node({inches:5, voltage:110, heat:45, brightness:970, type:'fluorecent'}));
+			list.addNode(new jsML.kNN.node({inches:5, voltage:110, heat:12, brightness:530, type:'fluorecent'}));
+			list.addNode(new jsML.kNN.node({inches:2, voltage:110, heat:34, brightness:850, type:'fluorecent'}));
+			list.addNode(new jsML.kNN.node({inches:5, voltage:110, heat:22, brightness:730, type:'fluorecent'}));
+			list.addNode(new jsML.kNN.node({inches:4, voltage:110, heat:11, brightness:515, type:'fluorecent'}));
+			list.addNode(new jsML.kNN.node({inches:4, voltage:110, heat:34, brightness:850, type:'fluorecent'}));
+			list.addNode(new jsML.kNN.node({inches:4, voltage:110, heat:48, brightness:1000, type:'fluorecent'}));
+			list.addNode(new jsML.kNN.node({inches:2, voltage:110, heat:29, brightness:780, type:'fluorecent'}));
+			list.addNode(new jsML.kNN.node({inches:3, voltage:110, heat:15, brightness:560, type:'fluorecent'}));
+			//bulb
+			list.addNode(new jsML.kNN.node({inches:6, voltage:220, heat:56, brightness:250, type:'bulb'}));
+			list.addNode(new jsML.kNN.node({inches:7, voltage:220, heat:99, brightness:250, type:'bulb'}));
+			list.addNode(new jsML.kNN.node({inches:9, voltage:220, heat:78, brightness:380, type:'bulb'}));
+			list.addNode(new jsML.kNN.node({inches:9, voltage:220, heat:67, brightness:390, type:'bulb'}));
+			list.addNode(new jsML.kNN.node({inches:8, voltage:220, heat:54, brightness:440, type:'bulb'}));
+			list.addNode(new jsML.kNN.node({inches:8, voltage:220, heat:71, brightness:366, type:'bulb'}));
+			list.addNode(new jsML.kNN.node({inches:9, voltage:220, heat:89, brightness:288, type:'bulb'}));
+			list.addNode(new jsML.kNN.node({inches:6, voltage:220, heat:83, brightness:299, type:'bulb'}));
+			list.addNode(new jsML.kNN.node({inches:6, voltage:220, heat:95, brightness:333, type:'bulb'}));
+			list.addNode(new jsML.kNN.node({inches:8, voltage:220, heat:73, brightness:345, type:'bulb'}));
+			list.addNode(new jsML.kNN.node({inches:7, voltage:220, heat:65, brightness:487, type:'bulb'}));
+			list.addNode(new jsML.kNN.node({inches:7, voltage:220, heat:66, brightness:499, type:'bulb'}));
+			list.addNode(new jsML.kNN.node({inches:6, voltage:220, heat:56, brightness:325, type:'bulb'}));
+			//bluelight
+			list.addNode(new jsML.kNN.node({inches:11, voltage:500, heat:100, brightness:130, type:'bluelight'}));
+			list.addNode(new jsML.kNN.node({inches:15, voltage:500, heat:101, brightness:90, type:'bluelight'}));
+			list.addNode(new jsML.kNN.node({inches:20, voltage:500, heat:150, brightness:249, type:'bluelight'}));
+			list.addNode(new jsML.kNN.node({inches:19, voltage:500, heat:125, brightness:222, type:'bluelight'}));
+			list.addNode(new jsML.kNN.node({inches:17, voltage:500, heat:186, brightness:111, type:'bluelight'}));
+			list.addNode(new jsML.kNN.node({inches:16, voltage:500, heat:163, brightness:156, type:'bluelight'}));
+			list.addNode(new jsML.kNN.node({inches:13, voltage:500, heat:187, brightness:214, type:'bluelight'}));
+			list.addNode(new jsML.kNN.node({inches:19, voltage:500, heat:169, brightness:233, type:'bluelight'}));
+			list.addNode(new jsML.kNN.node({inches:14, voltage:500, heat:163, brightness:158, type:'bluelight'}));
+			list.addNode(new jsML.kNN.node({inches:15, voltage:500, heat:147, brightness:199, type:'bluelight'}));
+			list.addNode(new jsML.kNN.node({inches:16, voltage:500, heat:158, brightness:167, type:'bluelight'}));
+			list.addNode(new jsML.kNN.node({inches:18, voltage:500, heat:196, brightness:135, type:'bluelight'}));
+			list.addNode(new jsML.kNN.node({inches:13, voltage:500, heat:199, brightness:200, type:'bluelight'}));
+			//redlight
+			list.addNode(new jsML.kNN.node({inches:1, voltage:1000, heat:220, brightness:10, type:'redlight'}));
+			list.addNode(new jsML.kNN.node({inches:2, voltage:1000, heat:230, brightness:20, type:'redlight'}));
+			list.addNode(new jsML.kNN.node({inches:1, voltage:1000, heat:240, brightness:30, type:'redlight'}));
+			list.addNode(new jsML.kNN.node({inches:3, voltage:1000, heat:250, brightness:40, type:'redlight'}));
+			list.addNode(new jsML.kNN.node({inches:4, voltage:1000, heat:210, brightness:50, type:'redlight'}));
+			list.addNode(new jsML.kNN.node({inches:1, voltage:1000, heat:260, brightness:55, type:'redlight'}));
+			list.addNode(new jsML.kNN.node({inches:1, voltage:1000, heat:265, brightness:45, type:'redlight'}));
+			list.addNode(new jsML.kNN.node({inches:3, voltage:1000, heat:255, brightness:35, type:'redlight'}));
+			list.addNode(new jsML.kNN.node({inches:2, voltage:1000, heat:245, brightness:25, type:'redlight'}));
+			list.addNode(new jsML.kNN.node({inches:1, voltage:1000, heat:235, brightness:15, type:'redlight'}));
+			list.addNode(new jsML.kNN.node({inches:1, voltage:1000, heat:225, brightness:5, type:'redlight'}));
+			list.addNode(new jsML.kNN.node({inches:4, voltage:1000, heat:215, brightness:60, type:'redlight'}));
+			list.addNode(new jsML.kNN.node({inches:3, voltage:1000, heat:205, brightness:65, type:'redlight'}));
+			//unknown nodes
+			list.addNode(new jsML.kNN.node({inches:1, voltage:100, heat:20, brightness:700}));
+			//indentify the unknown (type-less) nodes
+			list.identifyUnknownNodes(out);
+		</script>
+	</body>
+</html>
