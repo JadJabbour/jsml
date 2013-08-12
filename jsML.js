@@ -20,7 +20,7 @@ jsML.kNN.buildDimensionList = function(string){
 	for(var i = 0 ; i < list.length ; i++){
 		this.dimensions.push({ 
 			description : list[i].split('|')[0], 
-			priority : list[i].split('|')[1]
+			priority : list[i].split('|')[1]//the lower this is the higher this dimension's effect will be
 		});
 	}
 	return this;
@@ -33,7 +33,7 @@ jsML.kNN.node = function(input) {
 		this.neighbors = [];
 	}
 
-	//calculates the distance from neighbors
+	//calculates the distance from neighbors 
 	this.calculateNeighborDistances = function() {
 		var deltaDistance = 0;
 		var dimensions = jsML.kNN.dimensions;
@@ -69,6 +69,7 @@ jsML.kNN.node = function(input) {
 			for(var i = 0 ; i < selectedNeighbors.length ; i++){
 				if(!types[selectedNeighbors[i].type]){
 					tempName = selectedNeighbors[i].type;
+					//this is ugly i know, but i got over it and so should you :P
 					eval("types." + tempName + "=1");
 				}
 				else{
