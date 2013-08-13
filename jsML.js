@@ -104,11 +104,11 @@ jsML.kNN.nodeList = function(){
 		var types = {};
 		var lowest = 0;
 		for(var i = 0 ; i < this.nodes.length ; i++){
-			if(!types[this.node[i].type]){
-				eval("types." + this.node[i].type + "=1");
+			if(!types[this.nodes[i].type]){
+				eval("types." + this.nodes[i].type + "=1");
 			}
 			else{
-				types[this.node[i].type]++;
+				types[this.nodes[i].type]++;
 			}
 		}
 		for(var key in types){
