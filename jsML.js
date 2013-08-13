@@ -90,9 +90,9 @@ jsML.kNN.node = function(input) {
 };
 
 //the nodelist object
-jsML.kNN.nodeList = function(width){
+jsML.kNN.nodeList = function(){
 	this.nodes = [];
-	this.width = width;
+	this.width = 0;
 
 	//adds a node to the list
 	this.addNode = function(node){
@@ -101,7 +101,21 @@ jsML.kNN.nodeList = function(width){
 
 	//calculates the preferable K (width of comparison)
 	this.calculateK = function(){
-		//i still have no idea what to do here to get the optimal K
+		var types = {};
+		var lowest = 0;
+		for(var i = 0 ; i < this.nodes.length ; i++){
+			if(!types[this.node[i].type){
+				eval("types." + this.node[i].type + "=1");
+			}
+			else{
+				types[this.node[i].type]++;
+			}
+		}
+		for(var key in types){
+			lowest = types[key] < lowest || lowest == 0 ? types[key] : lowest;
+		}
+		this.width = lowest;
+		return lowest;
 	};
 
 	//calculates the ranges for the dimensions
@@ -127,6 +141,7 @@ jsML.kNN.nodeList = function(width){
 
 	//identifies unknown nodes and tries to guess their type
 	this.identifyUnknownNodes = function(output){
+		this.calculateK();
 		this.calculateRanges();
 		for(var i = 0 ; i < this.nodes.length ; i++){
 			if(!this.nodes[i].type){
@@ -142,7 +157,6 @@ jsML.kNN.nodeList = function(width){
 			}
 		}
 	};
-
 	return this;
 };
 
