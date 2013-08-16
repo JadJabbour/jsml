@@ -1,4 +1,4 @@
-jsml
+jsML
 ====
 
-different algorithms applied in javascript
+Machine Learning & Other Algorithms in Javacript

@@ -12,7 +12,7 @@
 			////create the dimension list of measured dimensions
 			jsML.kNN.buildDimensionList("inches|2,voltage|1,heat|3,brightness|4");
 			////initialize an instance of nodeList
-			var list = jsML.kNN.nodeList(13);
+			var list = new jsML.kNN.nodeList(13);
 			////fill list with data-full nodes
 			//fluorecent
 			list.addNode(new jsML.kNN.node({inches:5, voltage:110, heat:10, brightness:500, type:'fluorecent'}));
@@ -74,6 +74,104 @@
 			list.addNode(new jsML.kNN.node({inches:1, voltage:100, heat:20, brightness:700}));
 			//indentify the unknown (type-less) nodes
 			list.identifyUnknownNodes(out);
+
+			//////////////////////////////////////////////////////////////////////////////////////////////////////\
+			var community = new jsML.dfs.nodePopulation();
+
+			var pascal = new jsML.dfs.node("Pascal");
+			var sarah = new jsML.dfs.node("Sarah");
+			var noah = new jsML.dfs.node("Noah");
+			var joelle = new jsML.dfs.node("Joelle");
+			var julie = new jsML.dfs.node("Julie");
+			var lucas = new jsML.dfs.node("Lucas");
+			var orianne = new jsML.dfs.node("Orianne");
+			var aaron = new jsML.dfs.node("Aaron");
+			var mathilde = new jsML.dfs.node("Mathilde");
+			var kevin = new jsML.dfs.node("Kevin");
+			var sophie = new jsML.dfs.node("Sophie");
+			var matteo = new jsML.dfs.node("Matteo");
+			var stevie = new jsML.dfs.node("Stevie");
+			var roger = new jsML.dfs.node("Roger");
+			var stephanie = new jsML.dfs.node("Stephanie");
+			var bob = new jsML.dfs.node("Bob");
+			var louis = new jsML.dfs.node("Louis");
+
+			pascal.addNeighbor(noah);
+			community.addNode(pascal);
+
+			noah.addNeighbor(julie);
+			noah.addNeighbor(mathilde);
+			noah.addNeighbor(pascal);
+			community.addNode(noah);
+
+			julie.addNeighbor(noah);
+			julie.addNeighbor(roger);
+			julie.addNeighbor(sophie);
+			community.addNode(julie);
+
+			orianne.addNeighbor(mathilde);
+			orianne.addNeighbor(stephanie);
+			community.addNode(orianne);
+
+			sarah.addNeighbor(joelle);
+			sarah.addNeighbor(kevin);
+			community.addNode(sarah);
+
+			joelle.addNeighbor(aaron);
+			joelle.addNeighbor(bob);
+			joelle.addNeighbor(louis);
+			joelle.addNeighbor(sarah);
+			community.addNode(joelle);
+
+			lucas.addNeighbor(aaron);
+			lucas.addNeighbor(louis);
+			community.addNode(lucas);
+
+			aaron.addNeighbor(joelle);
+			aaron.addNeighbor(kevin);
+			aaron.addNeighbor(lucas);
+			aaron.addNeighbor(matteo);
+			community.addNode(aaron);
+
+			kevin.addNeighbor(aaron);
+			kevin.addNeighbor(mathilde);
+			kevin.addNeighbor(sarah);
+			kevin.addNeighbor(sophie);
+			community.addNode(kevin);
+
+			sophie.addNeighbor(julie);
+			sophie.addNeighbor(kevin);
+			sophie.addNeighbor(matteo);
+			community.addNode(sophie);
+
+			matteo.addNeighbor(aaron);
+			matteo.addNeighbor(sophie);
+			community.addNode(matteo);
+
+			roger.addNeighbor(julie);
+			community.addNode(roger);
+
+			community.addNode(stevie);
+
+			stephanie.addNeighbor(bob);
+			stephanie.addNeighbor(orianne);
+			community.addNode(stephanie);
+
+			bob.addNeighbor(joelle);
+			bob.addNeighbor(stephanie);
+			community.addNode(bob);
+
+			mathilde.addNeighbor(kevin);
+			mathilde.addNeighbor(orianne);
+			mathilde.addNeighbor(noah);
+			community.addNode(mathilde);
+
+			louis.addNeighbor(joelle);
+			louis.addNeighbor(lucas);
+			community.addNode(louis);
+
+			var shortestPath = community.findLink(pascal, orianne);
+			out(shortestPath);
 		</script>
 	</body>
 </html>
