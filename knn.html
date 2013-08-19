@@ -12,7 +12,7 @@
 			////create the dimension list of measured dimensions
 			jsML.kNN.buildDimensionList("inches|2,voltage|1,heat|3,brightness|4");
 			////initialize an instance of nodeList
-			var list = new jsML.kNN.nodeList(13);
+			var list = new jsML.kNN.nodeList();
 			////fill list with data-full nodes
 			//fluorecent
 			list.addNode(new jsML.kNN.node({inches:5, voltage:110, heat:10, brightness:500, type:'fluorecent'}));
