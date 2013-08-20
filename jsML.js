@@ -54,8 +54,8 @@ jsML.kNN.node.prototype.calculateNeighborDistances = function() {
 
 //sorts a node's neighbor according to distance
 jsML.kNN.node.prototype.sortNeighbors = function() {
-	this.neighbors.sort(function(n1, n2) {
-		return n1.distance - n2.distance;
+	this.neighbors.sort(function(nodeA, nodeB) {
+		return nodeA.distance - nodeB.distance;
 	});
 	return this;
 };
