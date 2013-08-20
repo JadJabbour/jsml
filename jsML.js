@@ -30,8 +30,8 @@ jsML.kNN.buildDimensionList = function(string){
 jsML.kNN.node = function(input) {
 	for (var key in input){
 		this[key] = input[key];
-		this.neighbors = [];
 	}
+	this.neighbors = [];
 	return this;
 };
 
