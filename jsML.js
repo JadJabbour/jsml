@@ -166,7 +166,7 @@ jsML.kNN.nodeList.prototype.identifyUnknownNodes = function(output){
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////
-//DFS Search
+//DFS Search 
 ////////////////////////////////////////////
 
 //the jsML.dfs object namespace
@@ -292,3 +292,39 @@ jsML.dfs.nodePopulation.prototype.findNode = function(id){
 	return null;
 };
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////
+//Sieve of Eratosthenes
+////////////////////////////////////////////
+
+//the jsML.SoE function
+jsML.SoE = function(maxNumber){
+	var collection = [];
+
+	var _fillCollection = function(max){
+		for(var i = 2; i <= max; i++){
+			collection.push(i);
+		}
+	};
+
+	var _removeMultiples = function(number, max){
+		var index = -1;
+		for(var i = 2; true; i++){
+			index = collection.indexOf(number*i);
+			if(index > -1){
+				collection.splice(index, 1);
+			} 
+			if((number*i) > collection[collection.length-1]){
+				break;
+			}
+		}
+	};
+
+	_fillCollection(maxNumber);
+	for(var i=0; i<collection.length; i++){
+		_removeMultiples(collection[i], maxNumber);
+	}
+
+	return collection;
+};
