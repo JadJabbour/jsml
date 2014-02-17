@@ -166,14 +166,14 @@ jsML.kNN.nodeList.prototype.identifyUnknownNodes = function(output){
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////
-//DFS Search 
+//Shortest Path  
 ////////////////////////////////////////////
 
-//the jsML.dfs object namespace
-jsML.dfs = {};
+//the jsML.spa object namespace
+jsML.spa = {};
 
 //The node object
-jsML.dfs.node = function(id, value){
+jsML.spa.node = function(id, value){
 	this.id = id;
 	this.value = value;
 	this.neighbors = [];
@@ -181,12 +181,12 @@ jsML.dfs.node = function(id, value){
 };
 
 //adds a neighbor node
-jsML.dfs.node.prototype.addNeighbor = function(neighborNode){
+jsML.spa.node.prototype.addNeighbor = function(neighborNode){
 	this.neighbors.push(neighborNode);
 };
 
 //calculates the shortest path from this to passed node
-jsML.dfs.node.prototype.pathTo = function(node, checkedList){
+jsML.spa.node.prototype.pathTo = function(node, checkedList){
 	var paths = [];
 	var passList = [];
 	if(!checkedList){
@@ -236,12 +236,12 @@ jsML.dfs.node.prototype.pathTo = function(node, checkedList){
 };
 
 //checks if this and the passed node are the same
-jsML.dfs.node.prototype.isSame = function(node){
+jsML.spa.node.prototype.isSame = function(node){
 	return this.id === node.id;
 };
 
 //checks if this node is in the passed list
-jsML.dfs.node.prototype.isInList = function(passedList){
+jsML.spa.node.prototype.isInList = function(passedList){
 	for(var i = 0 ; i < passedList.length ; i++){
 		if(this.isSame(passedList[i])){
 			return true;
@@ -251,17 +251,17 @@ jsML.dfs.node.prototype.isInList = function(passedList){
 };
 
 //the Node Population object
-jsML.dfs.nodePopulation = function(){
+jsML.spa.nodePopulation = function(){
 	this.nodes = [];
 };
 
 //adds a node to the population
-jsML.dfs.nodePopulation.prototype.addNode = function(node){
+jsML.spa.nodePopulation.prototype.addNode = function(node){
 	this.nodes.push(node);
 };
 
 //finds the shortest path between 2 nodes in the population
-jsML.dfs.nodePopulation.prototype.findLink = function(node1, node2){
+jsML.spa.nodePopulation.prototype.findLink = function(node1, node2){
 	if(this.checkExist(node1) && this.checkExist(node2)){
 		var trail = node1.pathTo(node2, null);		
 		return trail.length == 0 ? null : trail;
@@ -273,7 +273,7 @@ jsML.dfs.nodePopulation.prototype.findLink = function(node1, node2){
 };
 
 //checks if a node exists in the population
-jsML.dfs.nodePopulation.prototype.checkExist = function(node){
+jsML.spa.nodePopulation.prototype.checkExist = function(node){
 	for(var i = 0 ; i < this.nodes.length ; i++){
 		if(this.nodes[i].isSame(node)){
 			return true;
@@ -283,7 +283,7 @@ jsML.dfs.nodePopulation.prototype.checkExist = function(node){
 };
 
 //gets a node from the population by ID
-jsML.dfs.nodePopulation.prototype.findNode = function(id){
+jsML.spa.nodePopulation.prototype.findNode = function(id){
 	for(var i = 0 ; i < this.nodes.length ; i++){
 		if(this.nodes[i].id == id){
 			return this.nodes[i];
