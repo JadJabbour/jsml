@@ -71,7 +71,7 @@
 			list.addNode(new jsML.kNN.node({inches:4, voltage:1000, heat:215, brightness:60, type:'redlight'}));
 			list.addNode(new jsML.kNN.node({inches:3, voltage:1000, heat:205, brightness:65, type:'redlight'}));
 			//unknown nodes
-			list.addNode(new jsML.kNN.node({inches:1, voltage:100, heat:20, brightness:700}));
+			list.addNode(new jsML.kNN.node({inches:11, voltage:489, heat:55, brightness:700}));
 			//indentify the unknown (type-less) nodes
 			list.identifyUnknownNodes(out);
 
@@ -174,7 +174,7 @@
 			out(shortestPath);
 			//////////////////////////////////////////////////////////////////////////////////////////////////////\
 
-			out(jsML.SoE(1000));
+			out(jsML.SoE(10));
 			//////////////////////////////////////////////////////////////////////////////////////////////////////\
 
 			out(jsML.FibRecursive(10));

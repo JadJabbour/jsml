@@ -370,6 +370,58 @@ Array.prototype.uniqueSubArrayOf = function(a) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 ////////////////////////////////////////////
-//
+//Genetic Algorithm
 ////////////////////////////////////////////
+
+//the jsML.ga object namespace
+jsML.ga = { 
+	geneValueType : 'number',
+	geneValueMin : 32,
+	geneValueMax : 128,
+	mutationCoefecientMin : 0.1
+};
+
+//the jsML.ga.gene object constructor
+jsML.ga.gene = function(value){
+	this.value = !value ? jsML.ga.geneValueMin : value;
+	return this;
+};
+
+//jsML.ga.gene.cost calculates the cost of this gene in comparison with target gene
+jsML.ga.gene.prototype.cost = function(_tGene){
+	return Math.sqrt(Math.pow((gene.value - _tGene.value), 2));
+};
+
+
+jsML.ga.gene.prototype.mutate = function(){
+	this.value = ((Math.random() * (jsML.ga.geneValueMin - jsML.ga.geneValueMax)) + jsML.ga.geneValueMin);
+};
+
+//the jsML.ga.chromosome object constructor.
+jsML.ga.chromosome = function(_geneList, _mutationCoef, _tagetChromosome){
+	this.genes = !_geneList || !Array.isArray(_geneList) ? [] : _geneList;
+	this.mutationCoefecient = !_mutationCoef ? jsML.ga.mutationCoefecientMin : _mutationCoef;
+	this.targetChromosome = !_tagetChromosome ? { } : _tagetChromosome;
+	return this;
+};
+
+//jsML.ga.chromosome.cost calculates the cost of this chromosome in comparison with target chromosome
+jsML.ga.chromosome.prototype.cost = function(_tChromosome){
+	var cost = 0;
+	for(var i = 0; i < this.genes.length; i++){
+		cost += this.genes[i].cost(this.targetChromosome.genes[i]);
+	}
+	return cost;
+};
+
+//jsML.ga.chromosome.mutate mutate the chromosome randomly
+jsML.ga.chromosome.prototype.mutate = function(){
+	var index = 0;
+	if (Math.random() > this.mutationCoefecient){
+		index = Math.floor(Math.random() * this.genes.length);
+		this.genes[index].mutate();
+	}
+	return this;
+};
