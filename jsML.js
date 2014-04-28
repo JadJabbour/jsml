@@ -377,7 +377,6 @@ Array.prototype.uniqueSubArrayOf = function(a) {
 
 //the jsML.ga object namespace
 jsML.ga = { 
-	geneValueType : 'number',
 	geneValueMin : 32,
 	geneValueMax : 128,
 	mutationCoefecientMin : 0.1
@@ -396,14 +395,13 @@ jsML.ga.gene.prototype.cost = function(_tGene){
 
 
 jsML.ga.gene.prototype.mutate = function(){
-	this.value = ((Math.random() * (jsML.ga.geneValueMin - jsML.ga.geneValueMax)) + jsML.ga.geneValueMin);
+	this.value = ((Math.random() * (jsML.ga.geneValueMax - jsML.ga.geneValueMin)) + jsML.ga.geneValueMin);
 };
 
 //the jsML.ga.chromosome object constructor.
-jsML.ga.chromosome = function(_geneList, _mutationCoef, _tagetChromosome){
+jsML.ga.chromosome = function(_geneList, _mutationCoef){
 	this.genes = !_geneList || !Array.isArray(_geneList) ? [] : _geneList;
 	this.mutationCoefecient = !_mutationCoef ? jsML.ga.mutationCoefecientMin : _mutationCoef;
-	this.targetChromosome = !_tagetChromosome ? { } : _tagetChromosome;
 	return this;
 };
 
@@ -411,7 +409,7 @@ jsML.ga.chromosome = function(_geneList, _mutationCoef, _tagetChromosome){
 jsML.ga.chromosome.prototype.cost = function(_tChromosome){
 	var cost = 0;
 	for(var i = 0; i < this.genes.length; i++){
-		cost += this.genes[i].cost(this.targetChromosome.genes[i]);
+		cost += this.genes[i].cost(_tChromosome.genes[i]);
 	}
 	return cost;
 };
@@ -424,4 +422,15 @@ jsML.ga.chromosome.prototype.mutate = function(){
 		this.genes[index].mutate();
 	}
 	return this;
+};
+
+//jsML.ga.chromosome.mate mates 2 chromosoomes and yeilds 2 new ones.
+jsML.ga.chromosome.prototype.mate = function(_chromosome){
+	var childA, childB;
+	var pivotIndex = Math.round(this.genes.length / 2) - 1;
+	childA = this.genes.slice(0, pivotIndex) + _chromosome.genes.slice(pivotIndex);
+	childB = _chromosome.genes.slice(0, pivotIndex) + this.genes.slice(pivotIndex);
+	childA = new jsML.ga.chromosome(childA, this.mutationCoefecient);
+	childB = new jsML.ga.chromosome(childB, this.mutationCoefecient);
+	return [childA, childB];
 };
