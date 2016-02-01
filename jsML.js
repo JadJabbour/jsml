@@ -1,5 +1,5 @@
 /**************************************************/
-/*Machine Learning & Other Algorithms in Javacript*/
+/*Machine Learning & Other Algorithms in Javacript*/ hi lynn
 /**************************************************/
 
 //the jsML namespace
