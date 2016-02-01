@@ -434,3 +434,4 @@ jsML.ga.chromosome.prototype.mate = function(_chromosome){
 	childB = new jsML.ga.chromosome(childB, this.mutationCoefecient);
 	return [childA, childB];
 };
+//need to reapproach genetic Algorithm
